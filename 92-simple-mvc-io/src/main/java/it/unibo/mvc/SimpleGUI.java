@@ -18,13 +18,10 @@ import java.io.IOException;
  */
 public final class SimpleGUI {
 
-    private Controller controller;
     private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
 
     public SimpleGUI(final Controller controller) {
-
-        this.controller = controller;
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout()); 
         final JTextArea textInput = new JTextArea();
