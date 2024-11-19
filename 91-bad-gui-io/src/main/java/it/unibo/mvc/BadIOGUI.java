@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
@@ -68,6 +69,22 @@ public class BadIOGUI {
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace(); // NOPMD: allowed as this is just an exercise
+                }
+            }
+        });
+
+        read.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                System.out.println("Stampa file"); //NOPMD: exercise requires to print to stdout
+                try {
+                    final List<String> lines = Files.readAllLines(Paths.get(PATH));
+                    for (final String line : lines) {
+                        System.out.println(line); //NOPMD: exercise requires to print to stdout
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(frame, ex, "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
