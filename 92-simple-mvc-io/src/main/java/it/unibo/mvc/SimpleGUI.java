@@ -54,6 +54,7 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
+
     public static void main(String[] args) {
         new SimpleGUI(new Controller()).display();
     }

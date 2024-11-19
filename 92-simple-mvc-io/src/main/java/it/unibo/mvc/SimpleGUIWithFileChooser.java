@@ -26,16 +26,16 @@ public final class SimpleGUIWithFileChooser {
     private final JFrame frame = new JFrame();
 
     public SimpleGUIWithFileChooser(final Controller controller){
-        final JPanel innerTopPanel = new JPanel();
-        innerTopPanel.setLayout(new BorderLayout());
+        final JPanel canvas = new JPanel();
+        canvas.setLayout(new BorderLayout());
+        final JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
         final JTextField textField = new JTextField();
         textField.setEditable(false);
         final JButton browseButton = new JButton("Browse");
-        innerTopPanel.add(textField, BorderLayout.CENTER);
-        innerTopPanel.add(browseButton,BorderLayout.LINE_END);
-        final JPanel canvas = new JPanel();
-        canvas.setLayout(new BorderLayout());
-        canvas.add(innerTopPanel, BorderLayout.NORTH);
+        topPanel.add(textField, BorderLayout.CENTER);
+        topPanel.add(browseButton,BorderLayout.LINE_END);
+        canvas.add(topPanel, BorderLayout.NORTH);
         final JTextArea textInput = new JTextArea();
         canvas.add(textInput, BorderLayout.CENTER);
         final JButton saveButton = new JButton("Save");
