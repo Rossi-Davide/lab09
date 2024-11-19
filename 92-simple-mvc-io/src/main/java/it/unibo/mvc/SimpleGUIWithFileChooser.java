@@ -20,12 +20,25 @@ public final class SimpleGUIWithFileChooser {
         final JPanel innerTopPanel = new JPanel();
         innerTopPanel.setLayout(new BorderLayout());
         final JTextField textField = new JTextField();
-        final JButton browseButton = new JButton();
+        final JButton browseButton = new JButton("Browse");
         innerTopPanel.add(textField, BorderLayout.CENTER);
         innerTopPanel.add(browseButton,BorderLayout.LINE_END);
         final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(innerTopPanel, BorderLayout.NORTH);
+        frame.setContentPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+
+    private void display() {
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new SimpleGUIWithFileChooser().display();
     }
 
 }
