@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 
+ * Standard implementation of the Controller interface.
  *
  */
 public final class SimpleController implements Controller {
@@ -14,8 +14,9 @@ public final class SimpleController implements Controller {
     private String stringToPrint;
 
     @Override
-    public void setStringToPrint(final String inpuString) throws NullPointerException {
+    public void setStringToPrint(final String inpuString) {
         Objects.requireNonNull(inpuString);
+        stringToPrint = inpuString;
     }
 
     @Override
@@ -29,11 +30,11 @@ public final class SimpleController implements Controller {
     }
 
     @Override
-    public void printString() throws IllegalStateException {
-        if( stringToPrint == null) {
-            throw new IllegalArgumentException("No string was set to be printed");
+    public void printString() {
+        if (stringToPrint == null) {
+            throw new IllegalStateException("No string was set to be printed");
         }
-        System.out.println(stringToPrint);
+        System.out.println(stringToPrint); //NOPMD the exercise requires writing to stdout
         history.add(stringToPrint);
         stringToPrint = null;
     }

@@ -2,6 +2,7 @@ package it.unibo.mvc;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -18,9 +19,13 @@ import java.awt.event.ActionListener;
 public final class SimpleGUI {
 
     private final JFrame frame = new JFrame();
-    private Controller controller;
 
-    public SimpleGUI(){
+    /**
+     * Standard view.
+     * The GUI is composed of a text field, a text area and two buttons print and history
+     * @param controller The controller that listens for events
+     */
+    public SimpleGUI(final Controller controller) {
         final JPanel canvas = new JPanel(new BorderLayout());
         final JTextField enterString = new JTextField();
         canvas.add(enterString, BorderLayout.NORTH);
@@ -39,33 +44,44 @@ public final class SimpleGUI {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                controller.setStringToPrint(enterString.getText());
-                controller.printString();
+                try {
+                    controller.setStringToPrint(enterString.getText());
+                    controller.printString();
+                }  catch (IllegalStateException ex) {
+                    showError(ex.getMessage());
+                }
             }
-            
         });
         showHistoryButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                for(final String el : controller.getHistory()) {
-                    historyArea.append(el);
+                historyArea.setText(null);
+                for (final String el : controller.getHistory()) {
+                    historyArea.append(el + "\n");
                 } 
             }
-            
         });
         frame.setContentPane(canvas);
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 
-    public void setController(final Controller observer){
-        controller = observer;
+    /**
+     * Shows error dialog.
+     * @param msg
+     */
+    public void showError(final String msg) {
+        JOptionPane.showMessageDialog(frame, "ERROR", msg, 0);
     }
 
+    /**
+     * Creates a new view using SimpleGUI.
+     * @param args
+     */
     public static void main(final String[] args) {
-        new SimpleGUI().setController(new SimpleController());;
+        new SimpleGUI(new SimpleController());
     }
 }
