@@ -5,14 +5,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import it.unibo.mvc.panels.TextEditorPanel;
@@ -27,7 +25,11 @@ public final class SimpleGUIWithFileChooser {
     private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
 
-    public SimpleGUIWithFileChooser(final Controller controller){
+    /**
+     * Builds a GUI composed of a TextEditorPanel and a panel to select the destination file.
+     * @param controller The controller that works as listener for the button events
+     */
+    public SimpleGUIWithFileChooser(final Controller controller) {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JPanel topPanel = new JPanel();
@@ -36,9 +38,9 @@ public final class SimpleGUIWithFileChooser {
         textField.setEditable(false);
         final JButton browseButton = new JButton("Browse");
         topPanel.add(textField, BorderLayout.CENTER);
-        topPanel.add(browseButton,BorderLayout.LINE_END);
+        topPanel.add(browseButton, BorderLayout.LINE_END);
         canvas.add(topPanel, BorderLayout.NORTH);
-        canvas.add(new TextEditorPanel(controller, frame),BorderLayout.CENTER);
+        canvas.add(new TextEditorPanel(controller, frame), BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -47,7 +49,7 @@ public final class SimpleGUIWithFileChooser {
         browseButton.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 final JFileChooser fileChooser = new JFileChooser();
                 final int res = fileChooser.showSaveDialog(canvas); 
                 switch (res) {
@@ -62,7 +64,6 @@ public final class SimpleGUIWithFileChooser {
                         break;
                 }
             }
-            
         });
     }
 
@@ -76,7 +77,11 @@ public final class SimpleGUIWithFileChooser {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Creates a new View with SimpleGUIWithFileChooser.
+     * @param args
+     */
+    public static void main(final String[] args) {
         new SimpleGUIWithFileChooser(new Controller()).display();
     }
 
