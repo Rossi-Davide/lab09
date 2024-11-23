@@ -8,6 +8,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +20,7 @@ import java.awt.event.ActionListener;
  */
 public final class SimpleGUI {
 
+    private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
 
     /**
@@ -64,7 +67,10 @@ public final class SimpleGUI {
         });
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
+        final Dimension windowDimension = Toolkit.getDefaultToolkit().getScreenSize();
+        windowDimension.width = (int) windowDimension.getWidth() / PROPORTION;
+        windowDimension.height = (int) windowDimension.getHeight() / PROPORTION;
+        frame.setSize(windowDimension);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
