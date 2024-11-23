@@ -61,7 +61,11 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
+    public void setController(final Controller observer){
+        controller = observer;
+    }
+
     public static void main(final String[] args) {
-        new SimpleGUI();
+        new SimpleGUI().setController(new SimpleController());;
     }
 }
