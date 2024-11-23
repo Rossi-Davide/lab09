@@ -2,6 +2,7 @@ package it.unibo.mvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 
@@ -13,27 +14,28 @@ public final class SimpleController implements Controller {
     private String stringToPrint;
 
     @Override
-    public void setStringToPrint(String inpuString) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStringToPrint'");
+    public void setStringToPrint(final String inpuString) throws NullPointerException {
+        Objects.requireNonNull(inpuString);
     }
 
     @Override
     public String getNextStringToPrint() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNextStringToPrint'");
+        return stringToPrint;
     }
 
     @Override
     public List<String> getHistory() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHistory'");
+        return List.copyOf(history);
     }
 
     @Override
     public void printString() throws IllegalStateException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printString'");
+        if( stringToPrint == null) {
+            throw new IllegalArgumentException("No string was set to be printed");
+        }
+        System.out.println(stringToPrint);
+        history.add(stringToPrint);
+        stringToPrint = null;
     }
 
 }
