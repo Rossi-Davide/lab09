@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import it.unibo.mvc.panels.TextEditorPanel;
+
 
 /**
  * A very simple program using a graphical interface.
@@ -36,10 +38,7 @@ public final class SimpleGUIWithFileChooser {
         topPanel.add(textField, BorderLayout.CENTER);
         topPanel.add(browseButton,BorderLayout.LINE_END);
         canvas.add(topPanel, BorderLayout.NORTH);
-        final JTextArea textInput = new JTextArea();
-        canvas.add(textInput, BorderLayout.CENTER);
-        final JButton saveButton = new JButton("Save");
-        canvas.add(saveButton,BorderLayout.SOUTH);
+        canvas.add(new TextEditorPanel(controller, frame),BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -61,18 +60,6 @@ public final class SimpleGUIWithFileChooser {
                     default:
                         JOptionPane.showMessageDialog(canvas, "Error opening file", null, JOptionPane.ERROR_MESSAGE);
                         break;
-                }
-            }
-            
-        });
-        saveButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    controller.writeString(textInput.getText());
-                }catch (IOException ex){
-                    JOptionPane.showMessageDialog(frame, ex, "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
             
