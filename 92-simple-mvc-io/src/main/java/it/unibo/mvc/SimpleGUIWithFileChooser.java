@@ -58,7 +58,7 @@ public final class SimpleGUIWithFileChooser {
                     case JFileChooser.CANCEL_OPTION:
                         break;
                     default:
-                        JOptionPane.showMessageDialog(canvas, "Error opening file", null, JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(frame, "Error opening file", null, JOptionPane.ERROR_MESSAGE);
                         break;
                 }
             }
