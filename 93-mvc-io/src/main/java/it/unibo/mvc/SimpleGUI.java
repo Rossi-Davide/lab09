@@ -21,14 +21,20 @@ import java.awt.event.ActionListener;
 public final class SimpleGUI {
 
     private static final int PROPORTION = 5;
+
     private final JFrame frame = new JFrame();
+    private final Controller controller;
 
     /**
      * Standard view.
      * The GUI is composed of a text field, a text area and two buttons print and history
-     * @param controller The controller that listens for events
+     * @param listener The controller that will listen for events
      */
-    public SimpleGUI(final Controller controller) {
+    public SimpleGUI(final Controller listener) {
+        this.controller = new SimpleController(listener.getNextStringToPrint(), listener.getHistory());
+        /*
+         * UI
+         */
         final JPanel canvas = new JPanel(new BorderLayout());
         final JTextField enterString = new JTextField();
         canvas.add(enterString, BorderLayout.NORTH);
